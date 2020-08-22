@@ -18,9 +18,10 @@ namespace Api.Gateway
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureAppConfiguration((host, config) =>
                 {
-                    webBuilder.UseStartup<Startup>();
-                });
+                    config.AddJsonFile("ocelot.json");
+                })
+                .ConfigureWebHostDefaults(webBuilder => webBuilder.UseStartup<Startup>());
     }
 }
